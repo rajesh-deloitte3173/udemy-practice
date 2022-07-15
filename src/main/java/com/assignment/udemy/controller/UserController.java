@@ -1,5 +1,6 @@
 package com.assignment.udemy.controller;
 
+import com.assignment.udemy.entity.Course;
 import com.assignment.udemy.entity.User;
 import com.assignment.udemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,11 @@ public class UserController {
     @PutMapping("/cart/remove/{uid}/{cid}")
     private User removeCourseFromCart(@PathVariable("uid") int uid, @PathVariable("cid") int cid){
         return userService.removeCourseFromCart(uid,cid);
+    }
+
+    @CrossOrigin
+    @GetMapping("/cart/{uid}")
+    private List<Course> getAllCoursesInCart(@PathVariable("uid") int uid){
+        return userService.getAllCoursesInCart(uid);
     }
 }

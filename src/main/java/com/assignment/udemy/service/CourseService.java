@@ -42,8 +42,6 @@ public class CourseService {
         for (User user: users){
             User userDb = userRepo.findById(user.getId()).get();
             userDb.getOrderList().remove(course);
-//            user.getOrderList().remove(course);
-//            userDb.setOrderList(user.getOrderList());
             userRepo.save(userDb);
         }
 

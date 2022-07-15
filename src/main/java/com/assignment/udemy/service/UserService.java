@@ -50,6 +50,7 @@ public class UserService {
     public User orderCourse(int uid, int cid) {
         User user = userRepo.findById(uid).get();
         Course course = courseRepo.findById(cid).get();
+        user.getCartList().remove(course);
         user.addCourse(course);
 
         return userRepo.save(user);
@@ -71,5 +72,9 @@ public class UserService {
         Course course =courseRepo.findById(cid).get();
         user.getCartList().remove(course);
         return userRepo.save(user);
+    }
+
+    public List<Course> getAllCoursesInCart(int uid) {
+        return userRepo.findById(uid).get().getCartList();
     }
 }
