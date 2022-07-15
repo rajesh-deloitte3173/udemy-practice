@@ -37,10 +37,19 @@ public class CourseService {
         Course course = courseRepo.findById(id).get();
         List<User> users = course.getUserOrder();
 
+        List<User> usersC = course.getUserCart();
+
         for (User user: users){
             User userDb = userRepo.findById(user.getId()).get();
-            user.getOrderList().remove(course);
-            userDb.setOrderList(user.getOrderList());
+            userDb.getOrderList().remove(course);
+//            user.getOrderList().remove(course);
+//            userDb.setOrderList(user.getOrderList());
+            userRepo.save(userDb);
+        }
+
+        for (User user: usersC){
+            User userDb = userRepo.findById(user.getId()).get();
+            userDb.getCartList().remove(course);
             userRepo.save(userDb);
         }
 

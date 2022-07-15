@@ -43,7 +43,6 @@ public class User {
     )
     private String email;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_course_cart",

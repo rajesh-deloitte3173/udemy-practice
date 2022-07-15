@@ -49,4 +49,16 @@ public class UserController {
     private User getById(@PathVariable("id") int id){
         return userService.getById(id);
     }
+
+    @CrossOrigin
+    @PutMapping("/cart/{uid}/{cid}")
+    private User addCoursetoCart(@PathVariable("uid") int uid, @PathVariable("cid") int cid){
+        return userService.addCoursetoCart(uid,cid);
+    }
+
+    @CrossOrigin
+    @PutMapping("/cart/remove/{uid}/{cid}")
+    private User removeCourseFromCart(@PathVariable("uid") int uid, @PathVariable("cid") int cid){
+        return userService.removeCourseFromCart(uid,cid);
+    }
 }

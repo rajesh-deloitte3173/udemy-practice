@@ -58,4 +58,18 @@ public class UserService {
     public User getById(int id) {
         return userRepo.findById(id).get();
     }
+
+    public User addCoursetoCart(int uid, int cid) {
+        User user = userRepo.findById(uid).get();
+        Course course = courseRepo.findById(cid).get();
+        user.addCart(course);
+        return userRepo.save(user);
+    }
+
+    public User removeCourseFromCart(int uid, int cid) {
+        User user = userRepo.findById(uid).get();
+        Course course =courseRepo.findById(cid).get();
+        user.getCartList().remove(course);
+        return userRepo.save(user);
+    }
 }
