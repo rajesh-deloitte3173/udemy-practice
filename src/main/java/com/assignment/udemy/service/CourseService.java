@@ -5,6 +5,9 @@ import com.assignment.udemy.entity.User;
 import com.assignment.udemy.repository.CourseRepo;
 import com.assignment.udemy.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +45,25 @@ public class CourseService {
         }
 
         courseRepo.deleteById(id);
+    }
+
+    public List<Course> getCoursesSortLHPagi() {
+        Pageable sortByPriceDfilter = PageRequest.of(
+                0,
+                3,
+                Sort.by("price").ascending().and(Sort.by("name").and(Sort.by("domain")))
+        );
+
+        return courseRepo.findAll(sortByPriceDfilter).getContent();
+    }
+
+    public List<Course> getCoursesSortHLPagi() {
+        Pageable sortByPriceAfilter = PageRequest.of(
+                0,
+                3,
+                Sort.by("price").descending().and(Sort.by("name").and(Sort.by("domain")))
+        );
+
+        return courseRepo.findAll(sortByPriceAfilter).getContent();
     }
 }
